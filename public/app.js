@@ -31,6 +31,15 @@ const createMessage = (side, text, time, date) => {
         </div>
       </div>
     `);
+  scrollDown();
+};
+
+// scroll to bottom of the page
+const scrollDown = () => {
+  $(".chat-content").animate(
+    { scrollTop: $(".chat-content").prop("scrollHeight") },
+    2000
+  );
 };
 
 // send user message to server
