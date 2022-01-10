@@ -61,7 +61,6 @@ const createResponse = async () => {
 
   let answer = gptResponse.data.choices[0].text;
   prompt += `${answer}`;
-  console.log(prompt)
   return answer;
 };
 
