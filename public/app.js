@@ -5,12 +5,8 @@ $("#message").keypress((e) => {
       .val()
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;");
-    const time = new Date().toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-    const date = new Date().toLocaleDateString();
-
+    const time = getCurrentTimeAndDate().time;
+    const date = getCurrentTimeAndDate().date;
     // reset input field
     $("#message").val("");
     // create html for a new message
@@ -19,6 +15,15 @@ $("#message").keypress((e) => {
     postData("/", { newMessageText });
   }
 });
+
+const getCurrentTimeAndDate = () => {
+  const time = new Date().toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  const date = new Date().toLocaleDateString();
+  return { date: date, time: time };
+};
 
 // create the html for a message
 const createMessage = (side, text, time, date) => {
@@ -55,12 +60,10 @@ const postData = async (url = "", data = {}) => {
   });
 
   try {
+    // create a new message from the response
     const newData = await response.json();
-    const time = new Date().toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-    const date = new Date().toLocaleDateString();
+    const time = getCurrentTimeAndDate().time;
+    const date = getCurrentTimeAndDate().date;
     createMessage("left", newData["response"], time, date);
     return newData;
   } catch (error) {
