@@ -1,6 +1,6 @@
 $("#message").keypress((e) => {
   if (e.which === 13 && $("#message").val() !== "") {
-    // prevent script injections by encoding < and >
+    // prevent script injections by encoding < and > .replace part from stackoverflow
     const newMessageText = $("#message")
       .val()
       .replace(/</g, "&lt;")
@@ -41,6 +41,7 @@ const createMessage = (side, text, time, date) => {
 
 // scroll to bottom of the page
 const scrollDown = () => {
+  // with help of stackoverflow
   $(".chat-content").animate(
     { scrollTop: $(".chat-content").prop("scrollHeight") },
     2000
