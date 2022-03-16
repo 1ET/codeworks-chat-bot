@@ -10,7 +10,7 @@ const openai = new OpenAI(OPENAI_API_KEY);
 
 // Start up an instance of app
 const app = express();
-
+console.log(11)
 // Use path to work with files and directory paths
 const path = require("path");
 
